@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=kea
 PKG_VERSION:=2.6.4
-PKG_RELEASE:=1
+PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://ftp.isc.org/isc/kea/$(PKG_VERSION)
@@ -20,11 +20,10 @@ PKG_MAINTAINER:=BangLang Huang <banglang.huang@foxmail.com>, Rosy Song <rosysong
 PKG_LICENSE:=MPL-2.0
 PKG_LICENSE_FILES:=COPYING
 
+PKG_FIXUP:=autoreconf
+PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=gc-sections
-
-PKG_INSTALL:=1
-PKG_FIXUP:=autoreconf
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -64,8 +63,7 @@ endef
 define Package/kea-libs
 	$(call Package/kea/Default)
 	TITLE+=Libraries
-	DEPENDS:=+libopenssl +log4cplus \
-	+boost +boost-system
+	DEPENDS:=+libopenssl +log4cplus +boost
 endef
 define Package/kea-libs/description
 		Kea required Libraries.
@@ -193,6 +191,7 @@ endef
 ###### *************************************************************************
 
 CONFIGURE_ARGS += \
+	--enable-boost-headers-only \
 	--with-boost-include="$(STAGING_DIR)/usr" \
 	--with-log4cplus="$(STAGING_DIR)/usr" \
 	--with-openssl="$(STAGING_DIR)/usr" \
