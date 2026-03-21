@@ -1,10 +1,18 @@
 #!/bin/sh
 
-ACTION=$1
-shift
-INSTANCE=$1
-shift
+[ -z "$script_type" ] && {
+	logger -t "openvpn(proto)" -p daemon.warn "hotplug: variable 'script_type' not found"
+	exit
+}
 
-export ACTION=$ACTION
-export INSTANCE=$INSTANCE
+[ -z "$INTERFACE" ] && {
+	logger -t "openvpn(proto)" -p daemon.warn "hotplug: variable 'INTERFACE' not found"
+	exit
+}
+
+ACTION="$script_type"
+INSTANCE="$INTERFACE"
+
+export ACTION="$ACTION"
+export INSTANCE="$INSTANCE"
 exec /sbin/hotplug-call openvpn "$@"
