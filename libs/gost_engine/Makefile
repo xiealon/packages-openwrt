@@ -8,7 +8,7 @@ PKG_RELEASE:=12
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=v$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/gost-engine/engine
-PKG_MIRROR_HASH:=ad88b0bc4ede265bc91757f0bb9777a381f8e271faa43992a054ddd5f435ad88
+PKG_MIRROR_HASH:=b3a6701cd97e4db4f3e0f4b356c991075c6157dd3941d34851c8f36baa1d2721
 
 PKG_MAINTAINER:=Artur Petrov <github@phpchain.ru>
 PKG_LICENSE:=Apache-2.0
@@ -20,7 +20,7 @@ include $(INCLUDE_DIR)/cmake.mk
 define Package/gost_engine/Default
   $(call Package/openssl/engine/Default)
   TITLE:=GOST engine for OpenSSL
-  URL:=http://www.openssl.org/
+  URL:=https://github.com/gost-engine/engine
 endef
 
 define Package/gost_engine/Default/description
@@ -32,7 +32,6 @@ define Package/libopenssl-gost_engine
     $(call Package/gost_engine/Default)
     $(call Package/openssl/engine/Default)
     TITLE+= (library)
-    URL:=https://github.com/gost-engine/engine/
 endef
 
 define Package/libopenssl-gost_engine/description
